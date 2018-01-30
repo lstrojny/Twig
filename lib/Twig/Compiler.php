@@ -25,6 +25,7 @@ class Twig_Compiler implements Twig_CompilerInterface
     protected $sourceOffset;
     protected $sourceLine;
     protected $filename;
+    private $varCounter = 0;
 
     public function __construct(Twig_Environment $env)
     {
@@ -276,7 +277,7 @@ class Twig_Compiler implements Twig_CompilerInterface
 
     public function getVarName()
     {
-        return sprintf('__internal_%s', hash('sha256', uniqid(mt_rand(), true), false));
+        return sprintf('__internal_%s', hash('sha256', __METHOD__.$this->varCounter++));
     }
 }
 

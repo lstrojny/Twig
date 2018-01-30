@@ -17,6 +17,7 @@
 class Twig_Profiler_NodeVisitor_Profiler extends Twig_BaseNodeVisitor
 {
     private $extensionName;
+    private $varCounter = 0;
 
     public function __construct($extensionName)
     {
@@ -55,7 +56,7 @@ class Twig_Profiler_NodeVisitor_Profiler extends Twig_BaseNodeVisitor
 
     private function getVarName()
     {
-        return sprintf('__internal_%s', hash('sha256', uniqid(mt_rand(), true), false));
+        return sprintf('__internal_%s', hash('sha256', __METHOD__.$this->varCounter++));
     }
 
     public function getPriority()
